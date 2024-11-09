@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiRequest from "./apiRequest";
 import FormItem from "./FormItem";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,19 +12,23 @@ export default function Update() {
     phone: "",
   });
 
+ 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/users/" + id)
-      .then((res) => setEnteredValues(res.data))
-      .catch((err) => console.log(err));
-  }, [id]);
+    const fetchItems = async () => {
+      try {
+        const data = await apiRequest("GET", "http://localhost:3000/users/"+id);
+        setEnteredValues(data);
+      } catch (error) {
+        console.error("Failed to fetch items:", error);
+      }
+    };
+    
+    fetchItems();
+},[id]);
 
   const handleUpdate = async (data) => {
     try {
-      const response = await axios.put(
-        "http://localhost:3000/users/" + id,
-        data
-      );
+      const response = await apiRequest("PUT", "http://localhost:3000/users/"+id, data)
       console.log(response);
       setEnteredValues(() => [...enteredValues, response.data]);
       navigate("/");

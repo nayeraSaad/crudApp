@@ -1,5 +1,5 @@
-import axios from "axios";
 
+import apiRequest from "./apiRequest";
 import { useEffect, useState } from "react";
 import { Link} from "react-router-dom";
 
@@ -11,20 +11,26 @@ export default function Home() {
  
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/users")
-      .then((res) => setFormData(res.data))
-      .catch((err) => console.log(err));
-  }, []);
+    const fetchItems = async () => {
+      try {
+        const data = await apiRequest("GET", "http://localhost:3000/users");
+        setFormData(data);
+      } catch (error) {
+        console.error("Failed to fetch items:", error);
+      }
+    };
+    
+    fetchItems();
+},[]);
 
-const handleDelete= (id)=>{
+const handleDelete= async(id)=>{
 const confirm = window.confirm("are you sure you want to delete item ? ");
 if(confirm){
-  axios.delete("http://localhost:3000/users/"+id)
-  .then(res=>{
-    console.log(res);
+  try {
+    await apiRequest("DELETE", "http://localhost:3000/users/"+id);
     location.reload();
-  }).catch(err=>console.log(err));
+  } catch (error) {
+    console.error("Failed to delete item:", error); }
 }
 }
 

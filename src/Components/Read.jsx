@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
+import apiRequest from "./apiRequest";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
@@ -8,11 +8,17 @@ export default function Read() {
   const { id } = useParams();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/users/" + id)
-      .then((res) => setData(res.data))
-      .catch((err) => console.log(err));
-  }, [id]);
+    const fetchItems = async () => {
+      try {
+        const data = await apiRequest("GET", "http://localhost:3000/users/"+id);
+        setData(data);
+      } catch (error) {
+        console.error("Failed to fetch items:", error);
+      }
+    };
+    
+    fetchItems();
+},[id]);
 
   return (
     <div className="d-flex w-100 vh-100 align-items-center justify-content-center bg-light">

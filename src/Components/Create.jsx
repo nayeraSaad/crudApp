@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiRequest from "./apiRequest";
 import FormItem from "./FormItem";
 import { useState } from "react";
 //import { useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ export default function Create() {
 
   const handleCreate = async (data) => {
     try {
-        const response = await axios.post("http://localhost:3000/users", data);
+        const response = await apiRequest("POST", "http://localhost:3000/users/", data)
         console.log(response);
         setEnteredValues(() => [...enteredValues, response.data]);
         navigate('/');
