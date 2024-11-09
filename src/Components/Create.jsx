@@ -1,4 +1,4 @@
-import apiRequest from "./apiRequest";
+import apiRequest from "../apiRequest";
 import FormItem from "./FormItem";
 import { useState } from "react";
 //import { useForm } from "react-hook-form";

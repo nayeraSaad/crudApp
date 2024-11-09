@@ -1,4 +1,4 @@
-import apiRequest from "./apiRequest";
+import apiRequest from "../apiRequest";
 import FormItem from "./FormItem";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";

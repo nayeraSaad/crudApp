@@ -1,5 +1,5 @@
 
-import apiRequest from "./apiRequest";
+import apiRequest from '../apiRequest'
 import { useEffect, useState } from "react";
 import { Link} from "react-router-dom";
 
