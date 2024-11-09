@@ -6,7 +6,7 @@ const apiRequest = async (method, url, data = null) => {
       method: method,
       url: url,
     };
-    if (method !== "GET" && data) {
+    if (method !== "GET" && method !== "DELETE" && data) {
       config.data = data;
     }
     const response = await axios(config);
