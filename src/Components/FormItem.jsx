@@ -87,7 +87,7 @@ export default function FormItem({ onSubmit, defaultValues }) {
 
       {isSubmitting ? "isLoading..." : "Submit"}
     </button>
-    <Link to="/" className="btn btn-primary ms-3">
+    <Link to="/" relative="path" className="btn btn-primary ms-3">
       Back
     </Link>
   </form>

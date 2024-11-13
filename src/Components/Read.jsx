@@ -1,24 +1,16 @@
-import { useState, useEffect } from "react";
-import apiRequest from "../apiRequest";
+
+import { UseFetch } from "../Hooks/UseFetch";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export default function Read() {
-  const [data, setData] = useState([]);
+ 
   const { id } = useParams();
+  const { formData, loading, error } = UseFetch("http://localhost:3000/users", id);
 
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const data = await apiRequest("GET", "http://localhost:3000/users/"+id);
-        setData(data);
-      } catch (error) {
-        console.error("Failed to fetch items:", error);
-      }
-    };
-    
-    fetchItems();
-},[id]);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+  if (!formData) return null;
 
   return (
     <div className="d-flex w-100 vh-100 align-items-center justify-content-center bg-light">
@@ -26,15 +18,15 @@ export default function Read() {
         <h3 className="mb-4">User Details :</h3>
 
         <div className="mb-2">
-          <strong>Name: {data.name}</strong>
+          <strong>Name: {formData.name}</strong>
         </div>
         <div className="mb-2">
-          <strong>Email: {data.email}</strong>
+          <strong>Email: {formData.email}</strong>
         </div>
         <div className="mb-4">
-          <strong>Phone: {data.phone}</strong>
+          <strong>Phone: {formData.phone}</strong>
         </div>
-        <Link to={`/Update/${id}`}  className="btn btn-success">
+        <Link to={`/update/${id}`}  className="btn btn-success">
           Edit
         </Link>
         <Link to="/" className="btn btn-primary ms-3">
