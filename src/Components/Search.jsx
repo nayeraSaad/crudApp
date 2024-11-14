@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import PropTypes from 'prop-types';
 
 export default function Search({items, onSearch}) {
    
@@ -25,3 +26,7 @@ export default function Search({items, onSearch}) {
   </div>
   );
 }
+Search.propTypes = {
+  onSearch: PropTypes.func.isRequired,         
+  items: PropTypes.object,
+};

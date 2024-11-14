@@ -2,6 +2,7 @@ import apiRequest from "../apiRequest";
 import FormItem from "./FormItem";
 import { useNavigate, useParams } from "react-router-dom";
 import { UseFetch } from "../Hooks/UseFetch";
+import PropTypes from 'prop-types';
 
 export default function AddEdit({ isEditMode = false }) {
   const { id } = useParams();
@@ -41,3 +42,6 @@ export default function AddEdit({ isEditMode = false }) {
  </div>
 );
 }
+AddEdit.propTypes = {        
+  isEditMode: PropTypes.boolean,
+};

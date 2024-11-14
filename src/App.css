@@ -2,6 +2,9 @@
   width: 100%;
   margin: 0 auto;
 }
+.custom-font {
+  font-family: 'Lora', sans-serif; /* Apply the custom font */
+}
 
 .logo {
   height: 6em;

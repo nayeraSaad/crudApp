@@ -29,7 +29,7 @@ export default function Home() {
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center bg-light vh-100 ">
-      <h1>List Of Users</h1>
+      <h1 className=" bg-dark text-white  rounded pe-5 ps-5 pb-2 mt-3">List Of Users</h1>
       <div className="w-75 rounded bg-white border shadow p-4 table-responsive">
        <Search items={formData} onSearch={setFilteredData} />
         <table className=" table table-striped">
